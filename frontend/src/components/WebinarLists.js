@@ -11,7 +11,6 @@ const WebinarList = () => {
     language: [],
   });
 
-  // Fetch all webinars initially
   const fetchWebinars = async () => {
     try {
       const response = await axios.get("/webinars");
@@ -26,18 +25,16 @@ const WebinarList = () => {
     fetchWebinars();
   }, []);
 
-  // Update filters based on checkbox input
   const handleFilterChange = (filterName, value, checked) => {
     setFilters((prevFilters) => {
       const updatedValues = checked
-        ? [...prevFilters[filterName], value] // Add value
-        : prevFilters[filterName].filter((v) => v !== value); // Remove value
+        ? [...prevFilters[filterName], value]
+        : prevFilters[filterName].filter((v) => v !== value);
 
       return { ...prevFilters, [filterName]: updatedValues };
     });
   };
 
-  // Filter webinars locally based on selected filters
   useEffect(() => {
     const filtered = allWebinars.filter((webinar) => {
       const matchesLevel =
@@ -59,15 +56,17 @@ const WebinarList = () => {
 
   return (
     <div className="webinar-container">
-      <h1>Webinars</h1>
-
+      <div className="banner">
+        <h1 className="container-label">All Webinars</h1>
+        <p>Learn directly from Experts • Real-time Doubt Solving • Practical Applications</p>
+      </div>
       <div className="webinar-layout">
-        {/* Filters */}
         <div className="webinar-filter">
-          <WebinarFilter filters={filters} onFilterChange={handleFilterChange} />
+          <WebinarFilter
+            filters={filters}
+            onFilterChange={handleFilterChange}
+          />
         </div>
-
-        {/* Webinar List */}
         <div className="webinar-list">
           {filteredWebinars.map((webinar) => (
             <div key={webinar._id} className="webinar-card">

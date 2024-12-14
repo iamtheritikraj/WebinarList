@@ -1,23 +1,21 @@
 import React from "react";
 
 const WebinarFilter = ({ filters, onFilterChange }) => {
-  // Handler to update the filter state on checkbox change
+
   const handleCheckboxChange = (e) => {
     const { name, value, checked } = e.target;
 
     onFilterChange(name, value, checked);
   };
 
-  // Helper function to check if a value is selected
   const isChecked = (filterName, value) => {
     return filters[filterName]?.includes(value);
   };
 
   return (
-    <div className="filter-container">
+    <>
       <h2>Filters</h2>
 
-      {/* Level Filters */}
       <div className="filter-group">
         <h4>Level</h4>
         <label>
@@ -52,7 +50,6 @@ const WebinarFilter = ({ filters, onFilterChange }) => {
         </label>
       </div>
 
-      {/* Category Filters */}
       <div className="filter-group">
         <h4>Category</h4>
         <label>
@@ -87,7 +84,6 @@ const WebinarFilter = ({ filters, onFilterChange }) => {
         </label>
       </div>
 
-      {/* Language Filters */}
       <div className="filter-group">
         <h4>Language</h4>
         <label>
@@ -111,7 +107,7 @@ const WebinarFilter = ({ filters, onFilterChange }) => {
           Hindi
         </label>
       </div>
-    </div>
+    </>
   );
 };
 
