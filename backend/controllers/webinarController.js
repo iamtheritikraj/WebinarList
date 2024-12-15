@@ -53,9 +53,11 @@ export const getAllWebinars = async (req, res) => {
 
 export const updateWebinar = async (req, res) => {
   try {
-    const webinar = await Webinar.findByIdAndUpdate(req.params.tag, req.body, {
-      new: true,
-    });
+    const webinar = await Webinar.findOneAndUpdate(
+      { tag: req.params.tag }, 
+      req.body,               
+      { new: true } 
+    );
     if (!webinar) {
       return res.status(404).json({ message: "Webinar not found" });
     }
@@ -65,9 +67,10 @@ export const updateWebinar = async (req, res) => {
   }
 };
 
+
 export const deleteWebinar = async (req, res) => {
   try {
-    const webinar = await Webinar.findByIdAndDelete(req.params.tag);
+    const webinar = await Webinar.findOneAndDelete(req.params.tag);
     if (!webinar) {
       return res.status(404).json({ message: "Webinar not found" });
     }

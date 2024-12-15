@@ -1,5 +1,5 @@
 import React from 'react';
-import WebinarList from './components/WebinarLists.js';
+import WebinarList from './components/WebinarLists.jsx';
 import './styles/WebinarList.css';
 
 const App = () => {

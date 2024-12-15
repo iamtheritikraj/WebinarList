@@ -1,11 +1,13 @@
 import React from "react";
 
 const WebinarFilter = ({ filters, onFilterChange }) => {
-
   const handleCheckboxChange = (e) => {
     const { name, value, checked } = e.target;
-
     onFilterChange(name, value, checked);
+  };
+
+  const clearAll = () => {
+    onFilterChange(null, null, false); 
   };
 
   const isChecked = (filterName, value) => {
@@ -14,8 +16,12 @@ const WebinarFilter = ({ filters, onFilterChange }) => {
 
   return (
     <>
-      <h2>Filters</h2>
-
+    <div className="filter-header">
+    <h2>Filters</h2>
+      <span className="clear-button" onClick={clearAll}>
+        Clear All
+      </span>
+      </div>
       <div className="filter-group">
         <h4>Level</h4>
         <label>

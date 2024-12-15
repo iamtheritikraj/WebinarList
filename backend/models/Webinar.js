@@ -4,6 +4,7 @@ const webinarSchema = new mongoose.Schema(
   {
     tag: { type: Number, required: true, unique: true },
     title: { type: String, required: true },
+    tutor:{type: String, required: true},
     date: { type: Date, required: true },
     startTime: { type: String, required: true },
     endTime: { type: String, required: true },

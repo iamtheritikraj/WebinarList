@@ -10,6 +10,7 @@ const WebinarList = () => {
     category: [],
     language: [],
   });
+  const [isFilterOpen, setIsFilterOpen] = useState(false); // State for mobile filter menu
 
   const fetchWebinars = async () => {
     try {
@@ -26,6 +27,14 @@ const WebinarList = () => {
   }, []);
 
   const handleFilterChange = (filterName, value, checked) => {
+    if (filterName === null) {
+      setFilters({
+        level: [],
+        category: [],
+        language: [],
+      });
+      return;
+    }
     setFilters((prevFilters) => {
       const updatedValues = checked
         ? [...prevFilters[filterName], value]
@@ -58,16 +67,45 @@ const WebinarList = () => {
     <div className="webinar-container">
       <div className="banner">
         <h1 className="container-label">All Webinars</h1>
-        <p>Learn directly from Experts • Real-time Doubt Solving • Practical Applications</p>
+        <p>
+          Learn directly from Experts • Real-time Doubt Solving • Practical
+          Applications
+        </p>
       </div>
       <div className="webinar-layout">
-        <div className="webinar-filter">
+        <div className="desktop-filter">
           <WebinarFilter
             filters={filters}
             onFilterChange={handleFilterChange}
           />
         </div>
+        <div className="mobile-filter">
+          <button
+            className="filter-button"
+            onClick={() => setIsFilterOpen(true)}
+          >
+            Open Filters
+          </button>
+        </div>
+        {isFilterOpen && (
+          <div className="mobile-filter-menu">
+            <div className="mobile-filter-header">
+              <button
+                className="close-button"
+                onClick={() => setIsFilterOpen(false)}
+              >
+                ✕
+              </button>
+            </div>
+            <WebinarFilter
+              filters={filters}
+              onFilterChange={handleFilterChange}
+            />
+          </div>
+        )}
+
         <div className="webinar-list">
+          <p>{filteredWebinars.length} Webinars</p>
           {filteredWebinars.map((webinar) => (
             <div key={webinar._id} className="webinar-card">
               <div className="webinar-img">
@@ -75,6 +113,7 @@ const WebinarList = () => {
               </div>
               <div className="webinar-info">
                 <h3>{webinar.title}</h3>
+                <p>{webinar.tutor}</p>
                 <p>
                   🗓️ {new Date(webinar.date).toLocaleDateString()} |{" "}
                   {webinar.startTime} - {webinar.endTime}
