@@ -56,7 +56,6 @@ const WebinarList = () => {
         filters.language.length > 0
           ? filters.language.includes(webinar.language)
           : true;
-
       return matchesLevel && matchesCategory && matchesLanguage;
     });
 
