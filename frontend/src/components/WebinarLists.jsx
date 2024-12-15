@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "../axiosConfig";
 import WebinarFilter from "./WebinarFilter";
+import MobileFilter from "./MobileFilter";
 
 const WebinarList = () => {
   const [allWebinars, setAllWebinars] = useState([]);
@@ -85,23 +86,23 @@ const WebinarList = () => {
           >
             Open Filters
           </button>
-        </div>
-        {isFilterOpen && (
-          <div className="mobile-filter-menu">
-            <div className="mobile-filter-header">
-              <button
-                className="close-button"
-                onClick={() => setIsFilterOpen(false)}
-              >
-                ✕
-              </button>
+          {isFilterOpen && (
+            <div className="mobile-filter-menu">
+              <div>
+                <button
+                  className="close-button"
+                  onClick={() => setIsFilterOpen(false)}
+                >
+                  ✕
+                </button>
+              </div>
+              <MobileFilter
+                filters={filters}
+                onFilterChange={handleFilterChange}
+              />
             </div>
-            <WebinarFilter
-              filters={filters}
-              onFilterChange={handleFilterChange}
-            />
-          </div>
-        )}
+          )}
+        </div>
 
         <div className="webinar-list">
           <p>{filteredWebinars.length} Webinars</p>
