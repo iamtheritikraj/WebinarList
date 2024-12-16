@@ -51,6 +51,30 @@ export const getAllWebinars = async (req, res) => {
   }
 };
 
+export const getFilteredWebinars =async(req,res)=>{
+  try{
+    const { level , category }=req.body;
+    const filters={};
+    
+    if(level)
+    {
+      filters.level=level;
+
+    }
+    if(category)
+    {
+      filters.category=category;
+    }
+    const webinars = await Webinar.find(filters);
+
+    res.status(200).json(webinars);
+
+  } catch (error) {
+
+    res.status(500).json({ message: error.message });
+  }
+}
+
 export const updateWebinar = async (req, res) => {
   try {
     const webinar = await Webinar.findOneAndUpdate(
